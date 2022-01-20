@@ -1,5 +1,8 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import "custom.dart";
+import 'quote.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -29,7 +32,6 @@ class _RistState extends State<Rist> {
         author: "Emilio kariuki")
   ];
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,46 +43,14 @@ class _RistState extends State<Rist> {
       ),
       body: Column(
         children: qoutes.map((quote) {
-          return QuoteCard(quote: quote);
+          return QuoteCard(
+              quote: quote,
+              delete: () {
+                setState(() {
+                  qoutes.remove(quote);
+                });
+              });
         }).toList(),
-      ),
-    );
-  }
-}
-
-class QuoteCard extends StatelessWidget {
-  final Quote quote;
-  QuoteCard({Key? key, required this.quote}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16,16,16,0),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                quote.text,
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.grey,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                quote.author,
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
