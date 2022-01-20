@@ -18,10 +18,23 @@ class Rist extends StatefulWidget {
 class _RistState extends State<Rist> {
   Color red = Colors.red;
   List<Quote> qoutes = [
-    Quote(text: "Control is an illusion", author: "Emilio kariuki"),
-    Quote(text: "Control is an illusion", author: "Emilio kariuki"),
-    Quote(text: "Control is an illusion", author: "Emilio kariuki")
+    Quote(
+        text: "Control is an illusion The if block may",
+        author: "Emilio kariuki"),
+    Quote(
+        text: "Control is an illusion The if block may",
+        author: "Emilio kariukim"),
+    Quote(
+        text: "Control is an illusion The if block may",
+        author: "Emilio kariuki")
   ];
+  Widget quoteTemplate(quote) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+      child: QuoteCard(quote: quote),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +46,43 @@ class _RistState extends State<Rist> {
       ),
       body: Column(
         children: qoutes.map((quote) {
-          return Text('${quote.text} - ${quote.author}');
+          return quoteTemplate(quote);
         }).toList(),
+      ),
+    );
+  }
+}
+
+class QuoteCard extends StatelessWidget {
+  final Quote quote;
+  QuoteCard({Key? key, required this.quote}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              quote.text,
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.grey,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              quote.author,
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.grey,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
